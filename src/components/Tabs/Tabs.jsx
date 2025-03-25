@@ -1,7 +1,9 @@
 import classNames from 'classnames';
 
 export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
-  const active = tabs.find(tab => tab.id === activeTabId) || tabs[0];
+  const active = tabs.some(tab => tab.id === activeTabId)
+    ? tabs.find(tab => tab.id === activeTabId)
+    : tabs[0];
 
   return (
     <div className="section">
@@ -9,14 +11,12 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
       <div data-cy="TabsComponent">
         <div className="tabs is-boxed">
           <ul>
-            {tabs.map((tab, index) => (
+            {tabs.map(tab => (
               <li
                 key={tab.id}
                 data-cy="Tab"
                 className={classNames({
-                  'is-active':
-                    tab.id === activeTabId ||
-                    (index === 0 && !tabs.some(t => t.id === activeTabId)),
+                  'is-active': tab.id === active.id,
                 })}
               >
                 <a
