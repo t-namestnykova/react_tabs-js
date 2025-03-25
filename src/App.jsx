@@ -14,6 +14,16 @@ export const App = () => {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 
   return (
-    <Tabs tabs={tabs} activeTabId={activeTab} onTabSelected={setActiveTab} />
+    <div className="App">
+      {tabs.length > 0 ? (
+        <Tabs
+          tabs={tabs}
+          activeTabId={activeTab}
+          onTabSelected={setActiveTab}
+        />
+      ) : (
+        <p>No tabs available</p>
+      )}
+    </div>
   );
 };
